@@ -2,12 +2,12 @@ let http = require("http");
 let url = require('url');
 
 
-let start = (route) => {
+let start = (route, handle) => {
     http.createServer(function (request, response) {
         let pathname = url.parse(request.url).pathname;
-        route(pathname);
+        let temp = route(handle, pathname);
         response.writeHead(200, { "Content-Type": "text/plain" });
-        response.write("H2222");
+        response.write(temp);
         response.end();
     }).listen(8888);
 }
